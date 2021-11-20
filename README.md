@@ -19,7 +19,6 @@ details = {
 }
 df1 = pandas.DataFrame(details)
 
-
 # Writes the dataframe into a text file.
 df1.to_fancy_table('table_test.txt')
 
