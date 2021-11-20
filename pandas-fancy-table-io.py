@@ -37,7 +37,7 @@ def to_fancy_table(df, filename, cols=None, comment='#', tabulateprops={}):
     tabulateprops['tablefmt'] = 'plain'
 
     with open(filename, 'w') as f:
-        content = tabulate.tabulate(df[cols].values.tolist(), header, **tabulateprops)
+        content = tabulate.tabulate(df[cols].values.tolist(), headers=header, **tabulateprops)
         f.write(content)
 
 
