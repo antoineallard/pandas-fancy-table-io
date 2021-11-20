@@ -18,7 +18,7 @@ def to_table(df, fname, cols=None, comment='#', tabulateprops={}):
         A string, list or an array containing the name of the columns (as strings) to
         be written in the file (if None all columns will be written).
     comment : symbol used to indicate commented lines. Default: '#'.
-    tabulateprops : options to pass to the tabulate function. Default: tablefmt='plain', stralign='right', colalign=('left',)
+    tabulateprops : options to pass to the tabulate function (https://pypi.org/project/tabulate). Default: tablefmt='plain', stralign='right', colalign=('left',)
     """
 
     if cols is None:
@@ -44,14 +44,25 @@ def to_table(df, fname, cols=None, comment='#', tabulateprops={}):
 
 
 
-def from_table(fname, comment='#', index=None):
+def from_table(fname, comment='#'):
+    """Custom function to read nicely formatted tables into pandas dataframes from a text file.
 
+    Parameters
+    ----------
+    fname : str
+        The path to the new file in which the hidden parameters will be written.
+    comment : symbol used to indicate commented lines. Default: '#'.
+
+    Returns
+    -------
+    pandas.DataFrame
+    """
+
+    df = pandas.DataFrame()
     with open(fname, 'r') as f:
         header = f.readline().replace(comment, ' ').split()
         df = pandas.read_table(f, names=header, comment=comment, delimiter=r"\s+")
-        if index is not None:
-            df.set_index(index, inplace=True)
-        return df
+    return df
 
 
 pandas.DataFrame.to_table = to_table
