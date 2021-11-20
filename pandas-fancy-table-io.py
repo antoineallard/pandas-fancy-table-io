@@ -20,8 +20,8 @@ def to_fancy_table(df, filename, cols=None, comment='#', tabulateprops={}):
     comment : str, optional
         Symbol used to indicate commented lines. Default is `#`.
     tabulateprops : dict, optional
-        Options to pass to the [tabulate](https://pypi.org/project/tabulate) package. Default
-        keywords are `tablefmt='plain', stralign='right', colalign=('left',)`.
+        Options to pass to the `tabulate` function of the [tabulate](https://pypi.org/project/tabulate)
+        package. Uses the default settings of the `tabulate` function but enforces `tablefmt='plain'`.
     """
 
     if cols is None:
@@ -33,11 +33,8 @@ def to_fancy_table(df, filename, cols=None, comment='#', tabulateprops={}):
     header = list(cols)
     header[0] = comment + ' ' + header[0]
 
-    # Default options for the tabulate package if none provided.
-    if not tabulateprops:
-        tabulateprops = {'tablefmt': 'plain',
-                         'stralign': 'right',
-                         'colalign': ('left',)}
+    # Forces the table to follow the `plain`format.
+    tabulateprops['tablefmt'] = 'plain'
 
     with open(filename, 'w') as f:
         content = tabulate.tabulate(df[cols].values.tolist(), header, **tabulateprops)
