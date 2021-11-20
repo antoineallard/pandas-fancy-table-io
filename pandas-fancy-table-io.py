@@ -67,12 +67,11 @@ def from_fancy_table(filename, comment='#'):
     return df
 
 
-pandas.DataFrame.to_fancy_table = to_fancy_table
-pandas.from_fancy_table = from_fancy_table
-
-
 
 if __name__ == '__main__':
+
+    pandas.DataFrame.to_fancy_table = to_fancy_table
+    pandas.from_fancy_table = from_fancy_table
 
     details = {
         'Name' : ['Ankit', 'Aishwarya', 'Shaurya', 'Shivangi'],
@@ -81,6 +80,7 @@ if __name__ == '__main__':
      }
 
     df1 = pandas.DataFrame(details)
+    print(df1)
     df1.to_fancy_table('table_test.txt')
     df2 = pandas.from_fancy_table('table_test.txt')
 
