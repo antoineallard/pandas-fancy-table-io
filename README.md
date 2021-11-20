@@ -7,6 +7,7 @@ Custom functions to save pandas dataframes as nicely formatted tables into a tex
 ```python
 import pandas
 
+# Adds the custom functions to the pandas module.
 pandas.DataFrame.to_fancy_table = to_fancy_table
 pandas.from_fancy_table = from_fancy_table
 
