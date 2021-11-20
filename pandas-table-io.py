@@ -54,7 +54,7 @@ def from_table(fname, comment='#'):
     fname : str
         The path to the new file in which the hidden parameters will be written.
     comment : str, optional
-        Ssymbol used to indicate commented lines. Default: '#'.
+        Symbol used to indicate commented lines. Default: '#'.
 
     Returns
     -------
