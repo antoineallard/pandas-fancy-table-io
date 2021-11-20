@@ -7,20 +7,21 @@ import pandas
 import tabulate
 
 
-def to_table(df, fname, cols=None, comment='#', tabulateprops={}):
+def to_fancy_table(df, filename, cols=None, comment='#', tabulateprops={}):
     """Custom function to save pandas dataframes as nicely formatted tables into a text file.
 
     Parameters
     ----------
-    fname : str
+    filename : str
         The path to the new file in which the hidden parameters will be written.
-    cols : string, list or array of strings, optional
-        A string, list or an array containing the name of the columns (as strings) to
-        be written in the file (if None all columns will be written).
-    comment : string, optional
-        Symbol used to indicate commented lines. Default: '#'.
+    cols : str, list or array of str, optional
+        A string, or a list or an array containing the name of the columns (as strings) to
+        be written in the file. Default is to write the full dataframe into the text file.
+    comment : str, optional
+        Symbol used to indicate commented lines. Default is `#`.
     tabulateprops : dict, optional
-        Options to pass to the tabulate function (https://pypi.org/project/tabulate). Default: tablefmt='plain', stralign='right', colalign=('left',)
+        Options to pass to the [tabulate](https://pypi.org/project/tabulate) package. Default
+        keywords are `tablefmt='plain', stralign='right', colalign=('left',)`.
     """
 
     if cols is None:
@@ -32,29 +33,27 @@ def to_table(df, fname, cols=None, comment='#', tabulateprops={}):
     header = list(cols)
     header[0] = comment + ' ' + header[0]
 
-    # Options for the tabulate package.
-    if 'tablefmt' not in tabulateprops:
-        tabulateprops['tablefmt'] = 'plain'
-    if 'stralign' not in tabulateprops:
-        tabulateprops['stralign'] = 'right'
-    if 'colalign' not in tabulateprops:
-        tabulateprops['colalign'] = ('left',)
+    # Default options for the tabulate package if none provided.
+    if not tabulateprops:
+        tabulateprops = {'tablefmt': 'plain',
+                         'stralign': 'right',
+                         'colalign': ('left',)}
 
-    with open(fname, 'w') as f:
+    with open(filename, 'w') as f:
         content = tabulate.tabulate(df[cols].values.tolist(), header, **tabulateprops)
         f.write(content)
 
 
 
-def from_table(fname, comment='#'):
+def from_fancy_table(filename, comment='#'):
     """Custom function to read nicely formatted tables into pandas dataframes from a text file.
 
     Parameters
     ----------
-    fname : str
-        The path to the new file in which the hidden parameters will be written.
+    filename : str
+        The path to the file containing the fancy table.
     comment : str, optional
-        Symbol used to indicate commented lines. Default: '#'.
+        Symbol used to indicate commented lines. Default is `#`.
 
     Returns
     -------
@@ -62,14 +61,14 @@ def from_table(fname, comment='#'):
     """
 
     df = pandas.DataFrame()
-    with open(fname, 'r') as f:
+    with open(filename, 'r') as f:
         header = f.readline().replace(comment, ' ').split()
         df = pandas.read_table(f, names=header, comment=comment, delimiter=r"\s+")
     return df
 
 
-pandas.DataFrame.to_table = to_table
-pandas.from_table = from_table
+pandas.DataFrame.to_fancy_table = to_fancy_table
+pandas.from_fancy_table = from_fancy_table
 
 
 
@@ -82,8 +81,8 @@ if __name__ == '__main__':
      }
 
     df1 = pandas.DataFrame(details)
-    df1.to_table('table_test.txt')
-    df2 = pandas.from_table('table_test.txt')
+    df1.to_fancy_table('table_test.txt')
+    df2 = pandas.from_fancy_table('table_test.txt')
 
     print(df1 == df2)
 
