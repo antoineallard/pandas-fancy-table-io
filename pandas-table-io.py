@@ -17,8 +17,10 @@ def to_table(df, fname, cols=None, comment='#', tabulateprops={}):
     cols : string, list or array of strings, optional
         A string, list or an array containing the name of the columns (as strings) to
         be written in the file (if None all columns will be written).
-    comment : symbol used to indicate commented lines. Default: '#'.
-    tabulateprops : options to pass to the tabulate function (https://pypi.org/project/tabulate). Default: tablefmt='plain', stralign='right', colalign=('left',)
+    comment : string, optional
+        Symbol used to indicate commented lines. Default: '#'.
+    tabulateprops : dict, optional
+        Options to pass to the tabulate function (https://pypi.org/project/tabulate). Default: tablefmt='plain', stralign='right', colalign=('left',)
     """
 
     if cols is None:
@@ -51,7 +53,8 @@ def from_table(fname, comment='#'):
     ----------
     fname : str
         The path to the new file in which the hidden parameters will be written.
-    comment : symbol used to indicate commented lines. Default: '#'.
+    comment : str, optional
+        Ssymbol used to indicate commented lines. Default: '#'.
 
     Returns
     -------
