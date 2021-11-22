@@ -27,4 +27,4 @@ df1.to_fancy_table('table_test.txt')
 df2 = pandas.from_fancy_table('table_test.txt')
 ```
 
-See [`pandas_fancy_table_io.py`](pandas_fancy_table_io.py) and `example.py` for further details.
+See [`pandas_fancy_table_io.py`](pandas_fancy_table_io.py) and [`example.py`](example.py) for further details.
