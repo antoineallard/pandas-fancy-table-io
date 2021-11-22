@@ -1,10 +1,8 @@
-## Fancy table input/output with Pandas
+# -*- coding: utf-8 -*-
+# @author: Antoine Allard <antoineallard.info>
+#
+# Script testing the functionalities of the pandas-fancy-table-io methods.
 
-Custom functions to save pandas dataframes as nicely formatted tables into a text file, and vice versa.
-
-### Usage
-
-```python
 import pandas
 from pandas_fancy_table_io import to_fancy_table, from_fancy_table
 
@@ -26,6 +24,9 @@ df1.to_fancy_table('table_test.txt')
 
 # Reads the dataframe from the texte file.
 df2 = pandas.from_fancy_table('table_test.txt')
-```
 
-See source file for further details.
+
+print(df1)
+print(df2)
+assert all(df1 == df2)
+
