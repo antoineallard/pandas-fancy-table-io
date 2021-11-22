@@ -29,7 +29,8 @@ def to_fancy_table(df, filename, cols=None, comment='#', tabulateprops={}):
     else:
         if type(cols) is str:
             cols = [cols]
-        assert all(col in df.columns for col in cols), 'Error: some columns are not in the dataframe.'
+        if not all(col in df.columns for col in cols):
+            raise ValueError("Some columns are not in the dataframe.")
     header = list(cols)
     header[0] = comment + ' ' + header[0]
 
