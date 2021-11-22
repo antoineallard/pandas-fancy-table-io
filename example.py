@@ -6,7 +6,6 @@
 import pandas
 from pandas_fancy_table_io import to_fancy_table, from_fancy_table
 
-
 # Adds the custom functions to the pandas module.
 pandas.DataFrame.to_fancy_table = to_fancy_table
 pandas.from_fancy_table = from_fancy_table
